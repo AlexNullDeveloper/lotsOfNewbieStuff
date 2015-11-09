@@ -2,3 +2,9 @@ print("Hello")
 
 for a in range(100):
 	print a
+	if a < 50:
+		print("low")
+	elif a < 70:
+		print("bigger")
+	else:
+		print("big")
