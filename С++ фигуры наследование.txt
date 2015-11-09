@@ -1,0 +1,110 @@
+// вычислениеѕлощадиƒл€‘игур»спольз онстр-ов.cpp: определ€ет точку входа дл€ консольного приложени€.
+//
+#include "stdafx.h"
+#include <iostream>
+#include <locale>
+
+using namespace std;
+
+const double PI = 3.14;
+
+class Shape {
+	protected:
+		double area;
+	public:
+		char str[20];
+		double printArea() const { //ограничение вывода в той точке, откуда это было вызвано
+			return area;
+		}
+};
+
+/*
+//задание метода класса вне класса
+void Shape::printArea() const {
+cout << area;
+}
+*/
+
+//класс треугольник, наследует от Shape
+class Triangle:public Shape { //наследуем от Shape. из-за public наследуем все, как есть
+private:
+	double base, height;
+public:
+	Triangle(double, double); //конструктор класса
+};
+
+Triangle::Triangle(double b, double h) :base(b), height(h) { //описываем конструктор.
+//base = b; height = h;
+	area = 0.5*base*height; //b и h будут из main
+}
+
+//класс квадрат, наследует от Shape
+class Rectangle :public Shape { //наследуем от Shape. из-за public наследуем все, как есть
+private:
+	double base, height;
+public:
+	Rectangle(double, double); //конструктор класса
+};
+
+Rectangle::Rectangle(double b, double h) :base(b), height(h) { //описываем конструктор
+	area = base*height; //b и h будут из main
+}
+
+//класс круг, наследует от Shape
+class Circle :public Shape { //наследуем от Shape. из-за public наследуем все, как есть
+private:
+	double base, height;
+public:
+	Circle(double); //конструктор класса
+};
+
+Circle::Circle(double b) :base(b) { //описываем конструктор
+	area = base * PI; //b и h будут из main
+}
+
+/*class Square :public Rectangle { //наследуем от Rectangle. из-за public наследуем все, как есть
+private:
+	double base;
+public:
+	Rectangle(double, double); //конструктор класса
+};
+
+Square::Square(double b, double b) :base(b) { //описываем конструктор
+	area = base*base; //b и h будут из main
+}
+*/
+void main() {
+	setlocale(LC_ALL, "Russian");
+	double base, height;
+	cout << "¬ычисление площади треугольника:\n\n";
+	cout << "¬ведите высоту\n";
+	cin >> height;
+	cout << "¬ведите основание\n";
+	cin >> base;
+	Triangle t(base, height); //создаем объект и сразу передаем параметры, в конструктор нельз€ сразу передавать параметры
+	cout << "ѕлощадь треугольника:" << t.printArea();
+	cout << "\n\n";
+
+	cout << "¬ычисление площади пр€моугольника:\n\n";
+	cout << "¬ведите высоту\n";
+	cin >> height;
+	cout << "¬ведите основание\n";
+	cin >> base;
+	if (base == height) {
+
+	} else {
+		
+	}
+	Rectangle r(base, height);
+	cout << "ѕлощадь пр€моугольника:" << r.printArea();
+	cout << "\n\n";
+
+	cout << "¬ычисление площади круга:\n\n";
+	cout << "¬ведите диаметр\n";
+	cin >> base;
+	Circle c(base); //создаем объект и сразу передаем параметры, в конструктор нельз€ сразу передавать параметры
+	cout << "ѕлощадь круга:" << c.printArea();
+	cout << "\n\n";
+
+	system("pause");
+}
